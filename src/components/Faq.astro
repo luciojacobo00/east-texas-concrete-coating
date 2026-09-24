@@ -1,0 +1,107 @@
+---
+import { site } from '../lib/config';
+const { faq } = site;
+const items = faq?.items ?? [];
+
+// Lets search engines show the questions directly in results.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((q) => ({
+    '@type': 'Question',
+    name: q.question,
+    acceptedAnswer: { '@type': 'Answer', text: q.answer },
+  })),
+};
+---
+
+{faq && items.length > 0 && (
+  <section id="faq" class="section section--alt">
+    <div class="container faq">
+      <div class="faq__intro">
+        <span class="eyebrow">{faq.eyebrow}</span>
+        <h2>{faq.heading}</h2>
+        <p>{faq.intro}</p>
+        {faq.cta && <a href={faq.cta.href} class="btn btn--ghost">{faq.cta.label}</a>}
+      </div>
+
+      <div class="faq__list">
+        {items.map((q, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary>
+              <span class="faq__q">{q.question}</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__a"><p>{q.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </section>
+)}
+
+<style>
+  .faq {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+  @media (max-width: 900px) { .faq { grid-template-columns: minmax(0, 1fr); } }
+  .faq__intro { position: sticky; top: calc(var(--header-height) + 2rem); }
+  @media (max-width: 900px) { .faq__intro { position: static; } }
+  .faq__intro p { color: var(--color-muted); font-size: 1.1rem; margin-bottom: 1.75rem; }
+
+  .faq__list { display: grid; gap: 0.75rem; }
+  .faq__item {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+  }
+  .faq__item[open] { border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-border)); }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.15rem 1.35rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover .faq__q { color: var(--color-accent); }
+  .faq__q { transition: color 0.2s; }
+  /* Plus sign that turns into a minus when the answer is open. */
+  .faq__icon {
+    position: relative;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+  }
+  .faq__icon::before,
+  .faq__icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.65rem;
+    height: 2px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s;
+  }
+  .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .faq__item[open] .faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .faq__a { padding: 0 1.35rem 1.35rem; color: var(--color-muted); }
+  .faq__a p { margin: 0; max-width: 60ch; }
+</style>

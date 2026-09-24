@@ -1,0 +1,313 @@
+---
+import { site, fullAddress, telHref, telFor, mailHref, mapsHref } from '../lib/config';
+import SocialIcon from './SocialIcon.astro';
+const { contact, contactForm, company } = site;
+// If no form action is configured, fall back to a mailto: submission so the form still works.
+// POST + text/plain is the no-JS path (browsers put the fields in the email body); the script below composes a tidier email.
+const hasAction = contactForm.action.trim().length > 0;
+const action = hasAction ? contactForm.action : mailHref();
+const method = hasAction ? contactForm.method : 'POST';
+---
+
+<section id="contact" class="section section--alt">
+  <div class="container contact">
+    <div class="contact__info">
+      <span class="eyebrow">{contactForm.eyebrow}</span>
+      <h2>{contactForm.heading}</h2>
+      <p class="contact__intro">{contactForm.intro}</p>
+      {contact.bookingNote && <p class="contact__note">{contact.bookingNote}</p>}
+
+      <dl class="contact__details">
+        <div>
+          <dt>Phone</dt>
+          <dd>
+            <a href={telHref()}>{contact.phone}</a>
+            {contact.altPhone && <><br /><a href={telFor(contact.altPhone)}>{contact.altPhone}</a></>}
+          </dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href={mailHref()}>{contact.email}</a></dd>
+        </div>
+        <div>
+          <dt>{contact.address.street ? 'Shop' : 'Based in'}</dt>
+          <dd><a href={mapsHref()} target="_blank" rel="noopener">{fullAddress()}</a></dd>
+        </div>
+        {contact.hours.length > 0 && (
+          <div>
+            <dt>Hours</dt>
+            <dd>
+              <ul class="hours">
+                {contact.hours.map((h) => (
+                  <li><span>{h.days}</span><span>{h.time}</span></li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )}
+      </dl>
+      <p class="contact__area">{contact.serviceArea}</p>
+      {company.license && <p class="contact__license">{company.license}</p>}
+
+      {site.social.length > 0 && (
+        <ul class="contact__social">
+          {site.social.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener">
+                <SocialIcon platform={s.platform} />
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <form
+      class="contact__form"
+      action={action}
+      method={method}
+      enctype={hasAction ? undefined : 'text/plain'}
+      data-success={contactForm.successMessage}
+      data-has-action={String(hasAction)}
+      novalidate
+    >
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Your name <span aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span aria-hidden="true">*</span></label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="zip">Project ZIP code</label>
+          <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="75901" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="property">Property type <span aria-hidden="true">*</span></label>
+          <select id="property" name="property" required>
+            <option value="" disabled selected>Select one</option>
+            {contactForm.propertyOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label for="service">Project type <span aria-hidden="true">*</span></label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Select one</option>
+            {contactForm.serviceOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="sqft">Approx. square footage</label>
+          <input id="sqft" name="sqft" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 600" />
+        </div>
+        <div class="field">
+          <label for="timeline">Timeline</label>
+          <select id="timeline" name="timeline">
+            <option value="" disabled selected>Select one</option>
+            {contactForm.timelineOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="message">Tell us about the floor</label>
+        <textarea id="message" name="message" rows="4" placeholder="Current condition (bare concrete, old coating, cracks, moisture), colors you like, anything else we should know."></textarea>
+      </div>
+      <!-- Honeypot: bots fill this in, humans never see it -->
+      <div class="visually-hidden" aria-hidden="true">
+        <label for="company-website">Leave this empty</label>
+        <input id="company-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="form-footer">
+        <button type="submit" class="btn btn--primary">{contactForm.submitLabel}</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+  }
+  @media (max-width: 900px) { .contact { grid-template-columns: minmax(0, 1fr); } }
+
+  .contact__intro { color: var(--color-muted); font-size: 1.1rem; max-width: 30rem; }
+  .contact__note {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--color-accent);
+    margin: 1.5rem 0 0;
+  }
+  .contact__details { margin: 2.5rem 0 1.5rem; display: grid; }
+  .contact__details > div {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .contact__details > div:last-child { border-bottom: 1px solid var(--color-border); }
+  dt {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-top: 0.25rem;
+  }
+  dd { margin: 0; }
+  dd a { color: var(--color-text); text-decoration: none; }
+  dd a:hover { color: var(--color-accent); }
+  .hours { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+  .hours li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; max-width: 22rem; }
+  .hours li span:last-child { color: var(--color-muted); }
+  @media (max-width: 520px) { .hours li { flex-direction: column; } }
+  .contact__area, .contact__license { color: var(--color-muted); font-size: 0.95rem; }
+  .contact__license { font-size: 0.85rem; }
+
+  .contact__social { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+  .contact__social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .contact__social a:hover { color: var(--color-accent); }
+
+  .contact__form {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    display: grid;
+    gap: 1.4rem;
+  }
+  .field { display: grid; gap: 0.45rem; align-content: start; }
+  .field-row { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
+  label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  label span { color: var(--color-accent); }
+  input, select, textarea {
+    font: inherit;
+    color: var(--color-text);
+    padding: 0.8rem 0.95rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  /* A fixed height keeps text, number, and select controls level with each other across browsers. */
+  input, select { height: 3.25rem; }
+  select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23999' stroke-width='1.5'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+  select:invalid, select:has(option[value=""]:checked) { color: color-mix(in srgb, var(--color-muted) 65%, transparent); }
+  textarea { resize: vertical; }
+  ::placeholder { color: color-mix(in srgb, var(--color-muted) 65%, transparent); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+  .field.is-invalid input, .field.is-invalid select, .field.is-invalid textarea { border-color: #e2725b; }
+  .form-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .form-status { margin: 0; font-size: 0.95rem; }
+  .form-status.is-error { color: #e2725b; }
+  .form-status.is-success { color: var(--color-accent); }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.contact__form');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const hasAction = form.dataset.hasAction === 'true';
+
+    form.addEventListener('submit', async (e) => {
+      // Client-side validation
+      let firstInvalid: HTMLElement | null = null;
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[required]').forEach((el) => {
+        const ok = el.checkValidity();
+        el.closest('.field')?.classList.toggle('is-invalid', !ok);
+        el.setAttribute('aria-invalid', String(!ok));
+        if (!ok && !firstInvalid) firstInvalid = el;
+      });
+      if (firstInvalid) {
+        e.preventDefault();
+        status.textContent = 'Please fill in the required fields with a valid email and phone.';
+        status.className = 'form-status is-error';
+        (firstInvalid as HTMLElement).focus();
+        return;
+      }
+
+      e.preventDefault();
+
+      // Without a configured endpoint, open the visitor's mail client with the quote request written out.
+      if (!hasAction) {
+        const data = new FormData(form);
+        const lines = [...form.querySelectorAll<HTMLLabelElement>('.field label')].flatMap((label) => {
+          const value = String(data.get(label.htmlFor) ?? '').trim();
+          return value ? [`${label.textContent?.replace(/[*]/g, '').trim()}: ${value}`] : [];
+        });
+        const subject = `Quote request: ${data.get('service')} (${data.get('name')})`;
+        window.location.href = `${form.action}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+        status.textContent = 'Opening your email app to send the request…';
+        status.className = 'form-status';
+        return;
+      }
+
+      status.textContent = 'Sending…';
+      status.className = 'form-status';
+      submit.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        form.reset();
+        status.textContent = form.dataset.success ?? 'Thanks!';
+        status.className = 'form-status is-success';
+      } catch {
+        status.textContent = 'Something went wrong. Please call or email us instead.';
+        status.className = 'form-status is-error';
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  }
+</script>

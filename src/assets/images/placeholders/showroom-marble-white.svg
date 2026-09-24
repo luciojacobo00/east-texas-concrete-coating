@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1067" viewBox="0 0 1600 1067">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d5d4d0"/><stop offset="1" stop-color="#f0efec"/></linearGradient>
+  <linearGradient id="depth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.28"/></linearGradient>
+  <radialGradient id="gloss" cx="0.5" cy="0" r="0.75"><stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  <linearGradient id="vignette" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.25"/><stop offset="0.2" stop-color="#000" stop-opacity="0"/><stop offset="0.8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.25"/></linearGradient>
+  <clipPath id="floorClip"><rect x="0" y="363" width="1600" height="704"/></clipPath>
+  
+  <filter id="marble" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.004 0.009" numOctaves="4" seed="101" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="160" xChannelSelector="R" yChannelSelector="G"/>
+    <feGaussianBlur stdDeviation="3"/>
+  </filter>
+  <filter id="veinSharp" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="turbulence" baseFrequency="0.012 0.02" numOctaves="3" seed="108" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="90" xChannelSelector="R" yChannelSelector="B"/>
+  </filter>
+</defs>
+<rect width="1600" height="363" fill="url(#wall)"/>
+<rect x="0" y="349" width="1600" height="14" fill="#d5d4d0" opacity="0.9"/>
+<g clip-path="url(#floorClip)">
+  <rect x="0" y="363" width="1600" height="704" fill="#e6e6e4"/>
+  <g filter="url(#marble)"><ellipse cx="440" cy="672" rx="667" ry="79" fill="#b9bcc2" opacity="0.83" transform="rotate(125 440 672)"/><ellipse cx="1406" cy="484" rx="622" ry="76" fill="#9ea3ab" opacity="0.98" transform="rotate(112 1406 484)"/><ellipse cx="443" cy="376" rx="195" ry="101" fill="#ffffff" opacity="0.97" transform="rotate(32 443 376)"/><ellipse cx="866" cy="510" rx="329" ry="76" fill="#cfd3d8" opacity="0.90" transform="rotate(17 866 510)"/><ellipse cx="1391" cy="988" rx="428" ry="40" fill="#b9bcc2" opacity="0.90" transform="rotate(45 1391 988)"/><ellipse cx="1106" cy="848" rx="506" ry="105" fill="#9ea3ab" opacity="0.96" transform="rotate(23 1106 848)"/><ellipse cx="198" cy="500" rx="534" ry="74" fill="#ffffff" opacity="0.99" transform="rotate(37 198 500)"/><ellipse cx="181" cy="383" rx="201" ry="39" fill="#cfd3d8" opacity="0.87" transform="rotate(34 181 383)"/><ellipse cx="606" cy="560" rx="453" ry="30" fill="#b9bcc2" opacity="0.88" transform="rotate(179 606 560)"/><ellipse cx="169" cy="462" rx="629" ry="90" fill="#9ea3ab" opacity="0.93" transform="rotate(161 169 462)"/><ellipse cx="816" cy="558" rx="214" ry="47" fill="#ffffff" opacity="0.95" transform="rotate(46 816 558)"/><ellipse cx="1089" cy="1041" rx="340" ry="136" fill="#cfd3d8" opacity="0.98" transform="rotate(167 1089 1041)"/><ellipse cx="1448" cy="713" rx="288" ry="42" fill="#b9bcc2" opacity="0.93" transform="rotate(169 1448 713)"/><ellipse cx="1112" cy="747" rx="599" ry="87" fill="#9ea3ab" opacity="0.99" transform="rotate(22 1112 747)"/></g><g filter="url(#veinSharp)"><path d="M-100 643 C 480 687, 960 484, 1700 563" fill="none" stroke="#9ea3ab" stroke-width="4.2" opacity="0.7"/><path d="M-100 974 C 480 918, 960 1024, 1700 1013" fill="none" stroke="#ffffff" stroke-width="6.9" opacity="0.7"/><path d="M-100 910 C 480 950, 960 869, 1700 896" fill="none" stroke="#cfd3d8" stroke-width="2.7" opacity="0.7"/><path d="M-100 915 C 480 917, 960 1073, 1700 847" fill="none" stroke="#b9bcc2" stroke-width="5.4" opacity="0.7"/><path d="M-100 599 C 480 630, 960 575, 1700 635" fill="none" stroke="#9ea3ab" stroke-width="4.9" opacity="0.7"/><path d="M-100 477 C 480 481, 960 400, 1700 449" fill="none" stroke="#ffffff" stroke-width="2.7" opacity="0.7"/><path d="M-100 673 C 480 662, 960 685, 1700 644" fill="none" stroke="#cfd3d8" stroke-width="5.4" opacity="0.7"/><path d="M-100 747 C 480 694, 960 606, 1700 691" fill="none" stroke="#b9bcc2" stroke-width="4.5" opacity="0.7"/></g>
+  <rect x="0" y="363" width="1600" height="704" fill="url(#depth)"/>
+  <rect x="0" y="363" width="1600" height="704" fill="url(#gloss)"/>
+</g>
+<rect width="1600" height="1067" fill="url(#vignette)"/>
+</svg>

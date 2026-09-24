@@ -1,0 +1,524 @@
+---
+import { getImage } from 'astro:assets';
+import { site, resolveImage } from '../lib/config';
+import SiteImage from './SiteImage.astro';
+const { portfolio } = site;
+const uniform = (portfolio.grid ?? 'uniform') === 'uniform';
+
+const items = await Promise.all(
+  portfolio.items.map(async (item) => {
+    const image = resolveImage(item.src);
+    // Thumbnails come from SiteImage; the lightbox gets one larger rendition capped at 2400px.
+    let full: string;
+    if (typeof image === 'string') full = image;
+    else if (image.format === 'svg') full = image.src;
+    else full = (await getImage({ src: image, width: Math.min(image.width, 2400) })).src;
+    return { ...item, full };
+  }),
+);
+---
+
+<section id="portfolio" class="section">
+  <div class="container">
+    <div class="portfolio__head">
+      <div class="section-header">
+        <span class="eyebrow">{portfolio.eyebrow}</span>
+        <h2>{portfolio.heading}</h2>
+        <p>{portfolio.intro}</p>
+      </div>
+
+      {portfolio.categories.length > 1 && (
+        <div class="filters" role="group" aria-label="Filter projects by type">
+          <button type="button" class="filter" data-filter="*" aria-pressed="true">{portfolio.allLabel}</button>
+          {portfolio.categories.map((c) => (
+            <button type="button" class="filter" data-filter={c} aria-pressed="false">{c}</button>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <ul class:list={['gallery', { 'gallery--uniform': uniform }]}>
+      {items.map((p) => (
+        <li class:list={['gallery__item', `gallery__item--${p.orientation ?? 'landscape'}`]} data-category={p.category}>
+          <a
+            href={p.full}
+            class="tile"
+            data-full={p.full}
+            data-title={p.title}
+            data-system={p.system}
+            data-location={p.location}
+            data-alt={p.alt}
+          >
+            <SiteImage src={p.src} alt={p.alt} widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            <span class="tile__caption">
+              <span class="tile__category">{p.category}</span>
+              <strong>{p.title}</strong>
+              {p.system && <span class="tile__sub">{p.system}</span>}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="gallery__empty" hidden>No projects in this category yet.</p>
+
+    {portfolio.options && portfolio.options.items.length > 0 && (
+      <div class="options">
+        <div class="options__head">
+          <h3>{portfolio.options.heading}</h3>
+          <p>{portfolio.options.intro}</p>
+        </div>
+        <ul class="options__list">
+          {portfolio.options.items.map((o) => {
+            const [base, ...chips] = o.colors;
+            const c = (i: number) => chips[i % Math.max(chips.length, 1)] ?? base;
+            const Card = o.href ? 'a' : 'div';
+            const linkProps = o.href
+              ? { href: o.href, target: o.newTab ? '_blank' : undefined, rel: o.newTab ? 'noopener' : undefined }
+              : {};
+            return (
+              <li class="option">
+                <Card class="option__card" {...linkProps}>
+                {o.image ? (
+                  <span class="swatch swatch--image">
+                    <SiteImage src={o.image} alt={`${o.name} color blends`} widths={[400, 800]} sizes="(max-width: 560px) 100vw, 25vw" />
+                  </span>
+                ) : (
+                  <span
+                    class:list={['swatch', `swatch--${o.style}`]}
+                    style={`--base:${base};--c1:${c(0)};--c2:${c(1)};--c3:${c(2)};--c4:${c(3)}`}
+                    aria-hidden="true"
+                  ></span>
+                )}
+                <div class="option__body">
+                  <h4>{o.name}</h4>
+                  <p>{o.description}</p>
+                  {o.bestFor && <span class="option__best">Best for: {o.bestFor}</span>}
+                  {o.href && (
+                    <span class="option__more">
+                      Learn more
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </span>
+                  )}
+                </div>
+                </Card>
+              </li>
+            );
+          })}
+        </ul>
+        {portfolio.options.finishes && portfolio.options.finishes.length > 0 && (
+          <p class="options__finishes">
+            <span>Finishes</span>
+            {portfolio.options.finishes.map((f) => <em>{f}</em>)}
+          </p>
+        )}
+      </div>
+    )}
+  </div>
+
+  <dialog class="lightbox" aria-label="Project viewer">
+    <button type="button" class="lightbox__btn lightbox__close" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+    <button type="button" class="lightbox__btn lightbox__prev" aria-label="Previous">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>
+    </button>
+    <button type="button" class="lightbox__btn lightbox__next" aria-label="Next">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+    <figure class="lightbox__figure">
+      <div class="lightbox__stage"></div>
+      <figcaption>
+        <strong class="lightbox__title"></strong>
+        <span class="lightbox__system"></span>
+        <span class="lightbox__location"></span>
+        <span class="lightbox__count"></span>
+      </figcaption>
+    </figure>
+  </dialog>
+</section>
+
+<style>
+  .portfolio__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .portfolio__head .section-header { margin-bottom: 0; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .filter {
+    font: inherit;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 1rem;
+    color: var(--color-muted);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .filter:hover { color: var(--color-text); border-color: var(--color-muted); }
+  .filter[aria-pressed="true"] {
+    color: var(--color-on-accent);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  /* Dense grid: `wide` tiles span two columns and the rest backfill around them. */
+  .gallery {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 1rem;
+  }
+  .gallery__item--wide { grid-column: span 2; }
+  /* Uniform grid: same shape for every tile, no spanning, and a wider gutter so tiles never touch. */
+  .gallery--uniform { gap: 1.5rem; }
+  .gallery--uniform .gallery__item { grid-column: auto; }
+  .gallery--uniform .tile { aspect-ratio: 3 / 2 !important; min-height: 0; }
+  .gallery__item[hidden] { display: none; }
+  .gallery__empty { color: var(--color-muted); }
+
+  .tile {
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    color: #fff;
+    text-decoration: none;
+    aspect-ratio: 3 / 2;
+  }
+  .gallery__item--wide .tile { aspect-ratio: auto; min-height: 100%; }
+  .gallery__item--square .tile { aspect-ratio: 1; }
+  .gallery__item--portrait .tile { aspect-ratio: 4 / 5; }
+  .tile :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .tile:hover :global(img),
+  .tile:focus-visible :global(img) { transform: scale(1.04); }
+
+  .tile__caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 3.5rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .tile:hover .tile__caption,
+  .tile:focus-visible .tile__caption { opacity: 1; transform: none; }
+  .tile__category {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .tile__caption strong { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.05; text-transform: uppercase; }
+  .tile__sub { font-size: 0.85rem; opacity: 0.8; }
+
+  /* Touch screens have no hover, so captions stay visible there. */
+  @media (hover: none) {
+    .tile__caption { opacity: 1; transform: none; }
+  }
+  @media (max-width: 1024px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) {
+    .gallery { grid-template-columns: minmax(0, 1fr); }
+    .gallery__item--wide { grid-column: auto; }
+    .gallery__item--wide .tile { aspect-ratio: 3 / 2; }
+  }
+
+  /* --- Our Options --- */
+  .options {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--color-border);
+  }
+  .options__head { max-width: 44rem; margin-bottom: 2rem; }
+  .options__head h3 { font-size: clamp(1.9rem, 3.5vw, 2.6rem); }
+  .options__head p { color: var(--color-muted); margin: 0; }
+  .options__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  @media (max-width: 1024px) { .options__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .options__list { grid-template-columns: minmax(0, 1fr); } }
+  .option { display: flex; }
+  .option__card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  a.option__card:hover,
+  a.option__card:focus-visible { border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-border)); transform: translateY(-2px); }
+  .option__body { padding: 1.25rem 1.35rem 1.4rem; display: grid; gap: 0.5rem; align-content: start; flex: 1; }
+  .option__more {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+  .option__more svg { transition: transform 0.2s; }
+  a.option__card:hover .option__more svg { transform: translateX(3px); }
+  .option h4 { font-size: 1.35rem; margin: 0; }
+  .option p { color: var(--color-muted); font-size: 0.92rem; margin: 0; }
+  .option__best {
+    margin-top: 0.35rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  /* Swatches are pure CSS so a new option only needs colors in site.json. */
+  .swatch {
+    display: block;
+    aspect-ratio: 3 / 2;
+    background-color: var(--base);
+    position: relative;
+  }
+  .swatch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 45%, rgba(0, 0, 0, 0.18));
+  }
+  .swatch--flake {
+    background-image:
+      radial-gradient(var(--c1) 1.6px, transparent 1.9px),
+      radial-gradient(var(--c2) 1.4px, transparent 1.7px),
+      radial-gradient(var(--c3) 1.8px, transparent 2.1px),
+      radial-gradient(var(--c4) 1.2px, transparent 1.5px),
+      radial-gradient(var(--c1) 1.3px, transparent 1.6px);
+    background-size: 13px 11px, 17px 19px, 23px 17px, 11px 13px, 29px 23px;
+    background-position: 0 0, 5px 7px, 11px 3px, 2px 9px, 8px 14px;
+  }
+  .swatch--quartz {
+    background-image:
+      radial-gradient(var(--c1) 0.9px, transparent 1.1px),
+      radial-gradient(var(--c2) 0.8px, transparent 1px),
+      radial-gradient(var(--c3) 0.9px, transparent 1.1px);
+    background-size: 6px 5px, 7px 8px, 9px 7px;
+    background-position: 0 0, 3px 2px, 1px 5px;
+  }
+  .swatch--metallic {
+    background-image:
+      radial-gradient(ellipse 60% 40% at 25% 35%, var(--c1), transparent 70%),
+      radial-gradient(ellipse 50% 45% at 75% 65%, var(--c2), transparent 70%),
+      radial-gradient(ellipse 35% 30% at 60% 20%, var(--c3), transparent 70%),
+      radial-gradient(ellipse 45% 25% at 40% 85%, var(--c1), transparent 70%);
+  }
+  .swatch--solid { background-image: none; }
+  .swatch--image { background: #fff; }
+  .swatch--image { overflow: hidden; }
+  .swatch--image :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .swatch--image::after { background: none; }
+
+  .options__finishes {
+    margin: 1.5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+  .options__finishes span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+  }
+  .options__finishes em {
+    font-style: normal;
+    color: var(--color-text);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+  }
+
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    background: rgba(8, 8, 9, 0.96);
+  }
+  .lightbox::backdrop { background: rgba(8, 8, 9, 0.96); }
+  .lightbox__figure {
+    margin: 0;
+    height: 100%;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 1rem;
+    padding: 4rem clamp(1rem, 6vw, 5.5rem) 1.5rem;
+  }
+  .lightbox__stage { display: grid; place-items: center; min-height: 0; }
+  .lightbox__stage :global(img) {
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 0;
+    object-fit: contain;
+  }
+  .lightbox figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  .lightbox__title { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; text-transform: uppercase; }
+  .lightbox__system { opacity: 0.8; }
+  .lightbox__location { opacity: 0.6; }
+  .lightbox__location:not(:empty)::before { content: "· "; }
+  .lightbox__count { margin-left: auto; opacity: 0.6; font-variant-numeric: tabular-nums; letter-spacing: 0.1em; }
+
+  .lightbox__btn {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lightbox__btn:hover { background: rgba(255, 255, 255, 0.12); }
+  .lightbox__close { top: 0.75rem; right: 0.75rem; }
+  .lightbox__prev { left: 0.5rem; top: 50%; transform: translateY(-50%); }
+  .lightbox__next { right: 0.5rem; top: 50%; transform: translateY(-50%); }
+  @media (max-width: 640px) {
+    .lightbox__prev, .lightbox__next { top: auto; bottom: 4.5rem; transform: none; background: rgba(0, 0, 0, 0.4); }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('portfolio');
+  const dialog = section?.querySelector<HTMLDialogElement>('.lightbox');
+
+  if (section && dialog) {
+    const entries = [...section.querySelectorAll<HTMLElement>('.gallery__item')];
+    const filters = [...section.querySelectorAll<HTMLButtonElement>('.filter')];
+    const empty = section.querySelector<HTMLElement>('.gallery__empty');
+
+    // --- Category filter ---
+    filters.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter ?? '*';
+        filters.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        let shown = 0;
+        entries.forEach((li) => {
+          const match = filter === '*' || li.dataset.category === filter;
+          li.hidden = !match;
+          if (match) shown++;
+        });
+        if (empty) empty.hidden = shown > 0;
+      }),
+    );
+
+    // --- Lightbox ---
+    const stage = dialog.querySelector<HTMLElement>('.lightbox__stage')!;
+    const titleEl = dialog.querySelector<HTMLElement>('.lightbox__title')!;
+    const systemEl = dialog.querySelector<HTMLElement>('.lightbox__system')!;
+    const locationEl = dialog.querySelector<HTMLElement>('.lightbox__location')!;
+    const countEl = dialog.querySelector<HTMLElement>('.lightbox__count')!;
+    const prevBtn = dialog.querySelector<HTMLButtonElement>('.lightbox__prev')!;
+    const nextBtn = dialog.querySelector<HTMLButtonElement>('.lightbox__next')!;
+
+    // Prev/next only walk through tiles that pass the current filter.
+    const visibleTiles = () => entries.filter((li) => !li.hidden).map((li) => li.querySelector<HTMLAnchorElement>('.tile')!);
+    let current = 0;
+
+    const show = (index: number) => {
+      const tiles = visibleTiles();
+      if (tiles.length === 0) return;
+      current = (index + tiles.length) % tiles.length;
+      const { full, title, system, location, alt } = tiles[current].dataset;
+
+      const img = document.createElement('img');
+      Object.assign(img, { src: full ?? '', alt: alt ?? '' });
+      stage.replaceChildren(img);
+
+      titleEl.textContent = title ?? '';
+      systemEl.textContent = system ?? '';
+      locationEl.textContent = location ?? '';
+      countEl.textContent = `${current + 1} / ${tiles.length}`;
+      const single = tiles.length < 2;
+      prevBtn.hidden = single;
+      nextBtn.hidden = single;
+    };
+
+    entries.forEach((li) => {
+      li.querySelector('.tile')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(visibleTiles().indexOf(e.currentTarget as HTMLAnchorElement));
+        dialog.showModal();
+      });
+    });
+
+    prevBtn.addEventListener('click', () => show(current - 1));
+    nextBtn.addEventListener('click', () => show(current + 1));
+    dialog.querySelector('.lightbox__close')?.addEventListener('click', () => dialog.close());
+    // Clicking the dark area around the image closes the viewer.
+    dialog.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target === dialog || target.classList.contains('lightbox__stage') || target.classList.contains('lightbox__figure')) dialog.close();
+    });
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+    dialog.addEventListener('close', () => {
+      if (!dialog.open) stage.replaceChildren();
+    });
+  }
+</script>

@@ -1,0 +1,149 @@
+---
+import { site, telHref, navHref } from '../lib/config';
+import Logo from './Logo.astro';
+
+interface Props {
+  /** Float transparently over a full-bleed hero until the visitor scrolls. */
+  overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
+const { cta, showPhone } = site.header;
+const path = Astro.url.pathname;
+---
+
+<header class:list={['header', { 'header--overlay': overlay }]}>
+  <div class="container header__inner">
+    <Logo />
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul class="nav__list">
+        {site.nav.map((item) => (
+          <li><a href={navHref(item.href, path)}>{item.label}</a></li>
+        ))}
+      </ul>
+      {showPhone && (
+        <a href={telHref()} class="nav__phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.3-1.3a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"/></svg>
+          {site.contact.phone}
+        </a>
+      )}
+      {cta && <a href={navHref(cta.href, path)} class="btn btn--primary nav__cta">{cta.label}</a>}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .header--overlay { position: fixed; left: 0; right: 0; }
+  .header--overlay:not(.is-scrolled):not(.is-open) {
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: var(--header-height);
+  }
+  .nav { display: flex; align-items: center; gap: 2rem; }
+  .nav__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav__list a,
+  .nav__phone {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav__phone { display: inline-flex; align-items: center; gap: 0.5rem; letter-spacing: 0.04em; white-space: nowrap; font-size: 0.95rem; }
+  .nav__list a:hover,
+  .nav__phone:hover { color: var(--color-accent); }
+  .nav__cta { padding: 0.7rem 1.25rem; font-size: 0.95rem; white-space: nowrap; }
+
+  .nav-toggle {
+    display: none;
+    flex: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: 0;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  @media (max-width: 960px) {
+    .nav-toggle { display: flex; }
+    .nav {
+      display: none;
+      position: absolute;
+      left: 0; right: 0; top: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.25rem;
+      padding: 1.25rem 1.25rem 1.75rem;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav.is-open { display: flex; }
+    .nav__list { flex-direction: column; gap: 0; }
+    .nav__list a { display: block; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border); }
+    .nav__phone { padding: 0.25rem 0; }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.header');
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  if (header && toggle && nav) {
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle('is-open', open);
+      header.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+</script>

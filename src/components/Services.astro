@@ -1,0 +1,160 @@
+---
+import { site } from '../lib/config';
+import ServiceIcon from './ServiceIcon.astro';
+const { services } = site;
+---
+
+<section id="services" class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">{services.eyebrow}</span>
+      <h2>{services.heading}</h2>
+      <p>{services.intro}</p>
+    </div>
+
+    <ul class="services">
+      {services.items.map((s, i) => (
+        <li class="service">
+          <div class="service__top">
+            <span class="service__icon"><ServiceIcon name={s.icon} /></span>
+            <span class="service__index">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <h3>{s.title}</h3>
+          <p>{s.description}</p>
+          {s.features && s.features.length > 0 && (
+            <ul class="service__features">
+              {s.features.map((f) => <li>{f}</li>)}
+            </ul>
+          )}
+          <div class="service__foot">
+            {s.bestFor && s.bestFor.length > 0 && (
+              <ul class="service__tags">
+                {s.bestFor.map((t) => <li>{t}</li>)}
+              </ul>
+            )}
+            {s.startingAt && (
+              <p class="service__price">
+                {/\d/.test(s.startingAt) && <span>From</span>}
+                <strong>{s.startingAt}</strong>
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Each card draws its own 1px ring and the rings overlap in the 1px gap, so hairlines stay
+     single-weight and a partly filled last row leaves no empty boxes. */
+  .services {
+    --hairline: color-mix(in srgb, var(--color-text) 14%, var(--color-surface));
+    list-style: none;
+    margin: 0;
+    padding: 1px;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 1024px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .services { grid-template-columns: minmax(0, 1fr); } }
+  .service {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    background: var(--color-surface);
+    box-shadow: 0 0 0 1px var(--hairline);
+    transition: background 0.25s;
+  }
+  /* Accent bar slides in along the top edge on hover. */
+  .service::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--color-accent);
+    transition: width 0.3s;
+  }
+  .service:hover { background: color-mix(in srgb, var(--color-surface) 92%, var(--color-text)); }
+  .service:hover::before { width: 100%; }
+  .service__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .service__icon {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius);
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  .service__index {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+  .service p { color: var(--color-muted); }
+  .service__features {
+    list-style: none;
+    margin: 0.5rem 0 1.75rem;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+  }
+  .service__features li { display: flex; gap: 0.75rem; align-items: baseline; }
+  .service__features li::before {
+    content: "";
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-accent);
+    transform: translateY(-0.05em) rotate(45deg);
+  }
+  .service__foot {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+  }
+  .service__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .service__tags li {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+  .service .service__price {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .service__price strong {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--color-text);
+  }
+</style>

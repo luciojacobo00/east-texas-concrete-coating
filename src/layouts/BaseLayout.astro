@@ -1,0 +1,92 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '../styles/global.css';
+import { site } from '../lib/config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Let the header float transparently over a full-bleed hero at the top of the page. */
+  overlayHeader?: boolean;
+}
+
+const { title, description = site.company.description, overlayHeader = false } = Astro.props;
+const pageTitle = title ? `${title} | ${site.company.name}` : `${site.company.name} — ${site.company.tagline}`;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const t = site.theme;
+const onAccent = t.onAccent ?? '#111111';
+const share = site.company.shareImage?.trim();
+const ogImage = share ? (Astro.site && !/^https?:/.test(share) ? new URL(share, Astro.site).href : share) : undefined;
+
+const a = site.contact.address;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: site.company.name,
+  description: site.company.description,
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  url: Astro.site?.href,
+  foundingDate: String(site.company.yearFounded),
+  areaServed: site.contact.serviceArea,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: a.street,
+    addressLocality: a.city,
+    addressRegion: a.state,
+    postalCode: a.zip,
+  },
+  openingHours: site.contact.hours.map((h) => `${h.days}: ${h.time}`),
+  sameAs: site.social.map((s) => s.url),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta name="twitter:card" content="summary_large_image" />}
+    <meta name="theme-color" content={t.background} />
+    <style
+      set:html={`:root{--color-bg:${t.background};--color-surface:${t.surface};--color-text:${t.text};--color-accent:${t.accent};--color-accent-dark:${t.accentDark};--color-on-accent:${onAccent};--color-muted:color-mix(in srgb, ${t.text} 62%, ${t.background});--color-border:color-mix(in srgb, ${t.text} 14%, transparent);}`}
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header overlay={overlayHeader} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 1rem; }
+</style>

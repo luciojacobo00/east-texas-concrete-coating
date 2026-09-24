@@ -1,0 +1,42 @@
+---
+import { site } from '../lib/config';
+const { logo, name } = site.company;
+const hasMark = logo.src.trim().length > 0;
+// With no logo image configured, the company name always shows so the header is never empty.
+const showName = logo.showName || !hasMark;
+---
+
+<a href="/" class="logo" aria-label={`${name} home`}>
+  {hasMark && <img src={logo.src} alt={showName ? '' : logo.alt} width="44" height="44" />}
+  {showName && <span class="logo__name">{name}</span>}
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  .logo img { width: 44px; height: 44px; flex: none; object-fit: contain; }
+  .logo__name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  /* Long names wrap to two tight lines on phones instead of pushing the menu button off screen. */
+  @media (max-width: 560px) {
+    .logo__name {
+      font-size: 1.2rem;
+      line-height: 0.95;
+      white-space: normal;
+      text-wrap: balance;
+    }
+  }
+</style>

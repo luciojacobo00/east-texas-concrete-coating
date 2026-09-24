@@ -1,0 +1,602 @@
+{
+  "company": {
+    "name": "East Texas Concrete Coatings",
+    "tagline": "Epoxy flake & metallic floors for East Texas garages, shops, and businesses",
+    "logo": {
+      "src": "/brand/logo.png",
+      "alt": "East Texas Concrete Coatings logo",
+      "showName": true
+    },
+    "description": "Veteran owned and operated concrete coatings for garages, patios, shops, and more across East Texas. Durable, low-maintenance epoxy flake and polyaspartic floors for residential, commercial, and industrial spaces.",
+    "yearFounded": 2024,
+    "license": "Veteran owned and operated. Fully insured.",
+    "shareImage": "/brand/banner.png"
+  },
+  "contact": {
+    "phone": "936-537-2555",
+    "email": "quotes@example.com",
+    "address": {
+      "city": "East Texas",
+      "state": ""
+    },
+    "hours": [
+      {
+        "days": "Monday – Friday",
+        "time": "7:00 AM – 6:00 PM"
+      },
+      {
+        "days": "Saturday – Sunday",
+        "time": "6:00 AM – 8:00 PM"
+      }
+    ],
+    "serviceArea": "Serving all of East Texas, from the Piney Woods to the Lake Livingston, Conroe, and Houston areas.",
+    "bookingNote": "Free estimates. Most garages are done in one day."
+  },
+  "social": [
+    {
+      "platform": "facebook",
+      "url": "https://facebook.com/",
+      "label": "Facebook"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://instagram.com/",
+      "label": "Instagram"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://tiktok.com/",
+      "label": "TikTok"
+    }
+  ],
+  "nav": [
+    {
+      "label": "Services",
+      "href": "#services"
+    },
+    {
+      "label": "Our Work",
+      "href": "#portfolio"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ],
+  "header": {
+    "cta": {
+      "label": "Get a Free Quote",
+      "href": "#contact"
+    },
+    "showPhone": true
+  },
+  "hero": {
+    "layout": "banner",
+    "eyebrow": "Veteran Owned & Operated · East Texas",
+    "heading": "Tougher Floors for East Texas",
+    "subheading": "Epoxy flake and polyaspartic concrete coatings for garages, patios, shops, and more. We grind the slab, repair the cracks, and lay down a floor that's durable, low maintenance, and gives your space a cleaner, tougher look.",
+    "image": "/brand/banner.png",
+    "imagePosition": "center 40%",
+    "primaryCta": {
+      "label": "Get a Free Quote",
+      "href": "#contact"
+    },
+    "secondaryCta": {
+      "label": "See Our Work",
+      "href": "#portfolio"
+    },
+    "highlights": [
+      "Durable, hot-tire and chemical resistant",
+      "Low maintenance, hose-off clean",
+      "Residential · Commercial · Industrial"
+    ],
+    "stats": [],
+    "imageBlur": 8,
+    "imageFit": "contain",
+    "hideImage": true
+  },
+  "services": {
+    "eyebrow": "What we install",
+    "heading": "Floor Coating Services",
+    "intro": "Every floor starts with diamond grinding and crack repair, then gets the coating system that fits how the space is used: flake for grip and durability, marble for showpiece rooms, high-build epoxy where equipment runs.",
+    "items": [
+      {
+        "icon": "garage",
+        "title": "Garage Floors",
+        "description": "Full-broadcast flake floors that hide dust, resist hot-tire pickup, and clean up with a hose. Installed in one day, park on it in 48 hours.",
+        "features": [
+          "Diamond grinding & crack repair",
+          "Full-flake broadcast in 30+ blends",
+          "UV-stable polyaspartic topcoat"
+        ],
+        "bestFor": [
+          "Residential"
+        ]
+      },
+      {
+        "icon": "marble",
+        "title": "Marble & Metallic Epoxy",
+        "description": "Hand-poured metallic pigments worked into deep, glassy marble veining. No two floors are alike. Ideal for showrooms, lobbies, salons, and finished basements.",
+        "features": [
+          "Custom two- and three-tone color pours",
+          "100% solids epoxy, 1/8\" build",
+          "High-gloss or satin urethane finish"
+        ],
+        "bestFor": [
+          "Residential",
+          "Commercial"
+        ]
+      },
+      {
+        "icon": "forklift",
+        "title": "Shops & Barns",
+        "description": "High-build epoxy and polyaspartic systems for workshops, metal buildings, and equipment barns. Built for dropped tools, rolling jacks, and tractor tires.",
+        "features": [
+          "Chemical- and impact-resistant topcoats",
+          "Bay and safety-zone striping",
+          "Works around your schedule"
+        ],
+        "bestFor": [
+          "Residential",
+          "Commercial"
+        ]
+      },
+      {
+        "icon": "sun",
+        "title": "Patios & Porches",
+        "description": "Slip-resistant flake and quartz systems that stay cool underfoot and won't yellow, chalk, or peel under East Texas sun and rain.",
+        "features": [
+          "UV-stable polyaspartic system",
+          "Textured, barefoot-friendly finish",
+          "Covers stained or spalled concrete"
+        ],
+        "bestFor": [
+          "Residential",
+          "Commercial"
+        ]
+      },
+      {
+        "icon": "storefront",
+        "title": "Commercial & Industrial",
+        "description": "Seamless, easy-to-sanitize floors for retail, restaurant kitchens, gyms, clinics, and industrial facilities, with cove base and drains detailed in.",
+        "features": [
+          "Seamless cove base",
+          "USDA/FDA-compliant systems",
+          "Custom logos and color zoning"
+        ],
+        "bestFor": [
+          "Commercial",
+          "Industrial"
+        ]
+      },
+      {
+        "icon": "grinder",
+        "title": "Concrete Prep & Repair",
+        "description": "The part most failures trace back to. We diamond-grind every slab, remove old coatings, fill cracks and spalls, and test for moisture before anything gets poured.",
+        "features": [
+          "Dustless diamond grinding",
+          "Old coating & tile-mastic removal",
+          "Moisture mitigation primers"
+        ],
+        "bestFor": [
+          "Included with every floor"
+        ]
+      }
+    ]
+  },
+  "portfolio": {
+    "eyebrow": "Recent projects",
+    "heading": "Our Work",
+    "intro": "A sample of the floors we install across East Texas, from two-car garages to distribution centers. Tap any floor to see the system we used.",
+    "allLabel": "All",
+    "categories": [
+      "Residential",
+      "Commercial"
+    ],
+    "grid": "uniform",
+    "items": [
+      {
+        "src": "garage-gray-flake-cabinets.jpg",
+        "alt": "Bright two-car garage with gray cabinets and a high-gloss gray flake epoxy floor with the door open to the driveway",
+        "title": "Two-Car Garage, Gray Flake",
+        "system": "Full flake, gray blend · high-gloss polyaspartic",
+        "location": "Lufkin, TX",
+        "category": "Residential",
+        "orientation": "landscape"
+      },
+      {
+        "src": "showroom-pearl-metallic.jpg",
+        "alt": "Large open commercial showroom with a pearl and gray marbled metallic epoxy floor reflecting the lights",
+        "title": "Showroom, Pearl Metallic",
+        "system": "Metallic epoxy, pearl & charcoal pour · high-gloss urethane · 9,000 sq ft",
+        "location": "Conroe, TX",
+        "category": "Commercial",
+        "orientation": "wide"
+      },
+      {
+        "src": "garage-white-marble-metallic.jpg",
+        "alt": "Two-car garage with pegboard and shelving and a white and gray marble metallic epoxy floor",
+        "title": "Garage, Marble Metallic",
+        "system": "Metallic epoxy, pearl white & charcoal pour · high-gloss urethane",
+        "location": "Conroe, TX",
+        "category": "Residential",
+        "orientation": "landscape"
+      },
+      {
+        "src": "barbershop-white-metallic.jpg",
+        "alt": "Barbershop with black barber chairs and ring lights on a white and black marbled metallic epoxy floor",
+        "title": "Barbershop, White Marble",
+        "system": "Metallic epoxy, white & black pour · high-gloss urethane",
+        "location": "Lufkin, TX",
+        "category": "Commercial",
+        "orientation": "portrait"
+      },
+      {
+        "src": "porch-covered-tan-flake.jpg",
+        "alt": "Long covered porch with cedar posts and a tan flake coated floor overlooking a lawn",
+        "title": "Covered Porch",
+        "system": "Full flake, tan blend · UV-stable satin topcoat",
+        "location": "Huntsville, TX",
+        "category": "Residential",
+        "orientation": "square"
+      },
+      {
+        "src": "commercial-openplan-metallic.jpg",
+        "alt": "Open-plan commercial space under construction with exposed ceiling and a silver and charcoal metallic epoxy floor",
+        "title": "Retail Build-Out, Silver Metallic",
+        "system": "Metallic epoxy, silver & charcoal pour · satin urethane",
+        "location": "Nacogdoches, TX",
+        "category": "Commercial",
+        "orientation": "landscape"
+      },
+      {
+        "src": "garage-graphite-flake.jpg",
+        "alt": "Garage interior with cream cabinets and a freshly coated graphite flake floor",
+        "title": "Garage, Graphite Blend",
+        "system": "Full flake, graphite blend · polyaspartic topcoat",
+        "location": "Conroe, TX",
+        "category": "Residential",
+        "orientation": "portrait"
+      },
+      {
+        "src": "office-hallway-metallic.jpg",
+        "alt": "Office hallway and stairwell with a taupe and silver metallic epoxy floor",
+        "title": "Office Hallway & Stairwell",
+        "system": "Metallic epoxy, taupe & silver pour · satin urethane",
+        "location": "Huntsville, TX",
+        "category": "Commercial",
+        "orientation": "square"
+      },
+      {
+        "src": "basement-charcoal-metallic.jpg",
+        "alt": "Finished basement room with tan walls and a dark charcoal and silver metallic epoxy floor",
+        "title": "Basement, Charcoal Metallic",
+        "system": "Metallic epoxy, charcoal & silver pour · satin urethane",
+        "location": "Huntsville, TX",
+        "category": "Residential",
+        "orientation": "landscape"
+      },
+      {
+        "src": "lobby-blue-flake.jpg",
+        "alt": "Post office lobby with mailboxes and a high-gloss blue and gray flake epoxy floor",
+        "title": "Post Office Lobby",
+        "system": "Full flake, blue-gray blend · high-gloss urethane",
+        "location": "Nacogdoches, TX",
+        "category": "Commercial",
+        "orientation": "landscape"
+      },
+      {
+        "src": "garage-step-blue-flake.jpg",
+        "alt": "Close-up of a garage step and floor coated in black, white, gray and blue flake",
+        "title": "Garage Step Detail",
+        "system": "Full flake, blue-gray blend · coated step and cove",
+        "location": "Livingston, TX",
+        "category": "Residential",
+        "orientation": "landscape"
+      },
+      {
+        "src": "living-room-gray-metallic.jpg",
+        "alt": "Living room with a fireplace and a light gray and white marbled metallic epoxy floor",
+        "title": "Living Room, Gray Marble",
+        "system": "Metallic epoxy, silver & white pour · high-gloss urethane",
+        "location": "Lufkin, TX",
+        "category": "Residential",
+        "orientation": "square"
+      },
+      {
+        "src": "patio-steps-tan-flake.jpg",
+        "alt": "Back door steps and patio of a house coated in a tan and gray flake finish",
+        "title": "Back Patio & Steps",
+        "system": "Full flake, sandstone blend · anti-slip topcoat",
+        "location": "Willis, TX",
+        "category": "Residential",
+        "orientation": "portrait"
+      }
+    ],
+    "options": {
+      "heading": "Our Options",
+      "intro": "Every floor is built on the same diamond-ground prep. From there you pick the system that fits the space, then the color and finish.",
+      "items": [
+        {
+          "name": "Full Flake",
+          "description": "Our most popular garage and patio floor. Vinyl chips broadcast to full coverage hide dust and tire marks and add natural grip. 30+ blends.",
+          "style": "flake",
+          "colors": [
+            "#7a7d82",
+            "#2e3035",
+            "#b9bcc1",
+            "#e4e5e6",
+            "#3f6799"
+          ],
+          "bestFor": "Garages, patios, shops",
+          "image": "/brand/flake-blends.jpg",
+          "href": "/full-flake",
+          "newTab": true
+        },
+        {
+          "name": "Solid Color",
+          "description": "Clean, seamless single-color epoxy with an optional urethane topcoat. Easy to stripe for bays, aisles, and safety zones.",
+          "style": "solid",
+          "colors": [
+            "#a7abb0"
+          ],
+          "bestFor": "Warehouses, shops, commercial"
+        },
+        {
+          "name": "Metallic & Marble",
+          "description": "Hand-poured metallic pigments worked into deep, glassy veining. Every floor is one of a kind.",
+          "style": "metallic",
+          "colors": [
+            "#22242a",
+            "#b87333",
+            "#6d7078",
+            "#d9a05b"
+          ],
+          "bestFor": "Showrooms, basements, lobbies"
+        },
+        {
+          "name": "Quartz Broadcast",
+          "description": "Colored quartz sand double-broadcast into the coating for a dense, slip-resistant, hose-off floor that handles water and grease.",
+          "style": "quartz",
+          "colors": [
+            "#9c7b5c",
+            "#d8c3a5",
+            "#6b4f3a",
+            "#b89a7a"
+          ],
+          "bestFor": "Kitchens, pool decks, wash bays"
+        }
+      ],
+      "finishes": [
+        "High gloss",
+        "Satin",
+        "Matte",
+        "Anti-slip grit",
+        "Custom striping & logos"
+      ]
+    }
+  },
+  "faq": {
+    "eyebrow": "Good to know",
+    "heading": "Common Questions",
+    "intro": "Straight answers to what homeowners and facility managers ask us most. Don't see yours? Call or send the form and we'll walk you through it.",
+    "cta": {
+      "label": "Ask Us Anything",
+      "href": "#contact"
+    },
+    "items": [
+      {
+        "question": "How long does a garage floor take?",
+        "answer": "Most two- and three-car garages are ground, repaired, coated, and flaked in a single day. You can walk on the floor the next morning, move light items back in after 24 hours, and park on it after 48 hours. Larger shops and commercial floors are scheduled in phases so you can keep working."
+      },
+      {
+        "question": "What's the difference between epoxy and polyaspartic?",
+        "answer": "Epoxy is a thick, strong base coat that bonds to the concrete and builds the floor. Polyaspartic is a faster-curing, UV-stable topcoat that won't yellow in sunlight and resists hot-tire pickup and chemicals. We use epoxy where it belongs, on the base, and polyaspartic on top, which is why our floors go in fast and hold up outdoors."
+      },
+      {
+        "question": "How do you prep the concrete?",
+        "answer": "Every floor is diamond-ground with dust-collecting grinders to open the pores of the concrete so the coating bonds mechanically. We then fill cracks and spalls, grind them flush, check for moisture, and vacuum everything before the first coat goes down. Acid etching and paint rollers from a big-box kit skip this step, which is why those floors peel."
+      },
+      {
+        "question": "Will it peel or hot-tire lift like the kit I tried?",
+        "answer": "No. Peeling comes from poor prep and thin, water-based coatings. We grind the slab, use 100% solids epoxy for the base, and finish with a polyaspartic topcoat that stays put under hot tires, dropped tools, and oil. Our residential floors carry a 15-year warranty against peeling and delamination."
+      },
+      {
+        "question": "Can you coat old, cracked, or stained concrete?",
+        "answer": "Almost always. Cracks and chips are repaired and ground flush before coating, and a full-flake floor hides stains and surface imperfections completely. During the free estimate we test for moisture and check for structural problems; if a slab needs a moisture-mitigation primer or isn't a good candidate, we'll tell you up front."
+      },
+      {
+        "question": "Is it slippery when wet?",
+        "answer": "A full-flake floor has natural texture from the chips, and we can add an anti-slip additive to the topcoat for patios, pool decks, entryways, and shop bays where water or oil is expected. Glossy marble floors can be finished satin or with a light grit for the same reason."
+      },
+      {
+        "question": "How do I clean and maintain it?",
+        "answer": "Sweep or dust-mop as needed and hose it off or mop with warm water and a little neutral cleaner. There's no waxing or sealing to keep up with. Avoid rubber-backed mats sitting in one spot for months and use a dolly instead of dragging heavy steel edges across the floor."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "Pricing depends on square footage, the condition of the concrete, and the system you choose, so we quote every floor after a free on-site measurement. A typical two-car garage flake floor is priced by the square foot, and bigger shops and commercial floors get volume pricing. There's never a charge for the estimate."
+      },
+      {
+        "question": "Do you work on commercial and industrial floors?",
+        "answer": "Yes. We install high-build epoxy, urethane mortar, and quartz systems for warehouses, shops, restaurant kitchens, gyms, clinics, and retail spaces, including line striping, safety zones, cove base, and drains. Night and weekend installs are available so you don't lose production time."
+      },
+      {
+        "question": "Are you licensed and insured?",
+        "answer": "We're a veteran owned and operated company, fully insured, and every crew member on your property works directly for us. Ask and we'll gladly send a certificate of insurance before the job starts."
+      }
+    ]
+  },
+  "contactForm": {
+    "eyebrow": "Free estimate",
+    "heading": "Get a quote for your floor",
+    "intro": "Tell us about the space and we'll call back within one business day to schedule a free on-site estimate.",
+    "action": "",
+    "method": "POST",
+    "submitLabel": "Request My Quote",
+    "successMessage": "Thanks! Your request is in. We'll call within one business day to schedule your free estimate.",
+    "propertyOptions": [
+      "Residential",
+      "Commercial / Industrial"
+    ],
+    "serviceOptions": [
+      "Garage floor",
+      "Patio or porch",
+      "Shop or barn",
+      "Commercial / industrial space",
+      "Marble / metallic epoxy",
+      "Concrete repair or coating removal",
+      "Other"
+    ],
+    "timelineOptions": [
+      "As soon as possible",
+      "Within 1–3 months",
+      "3+ months, just planning"
+    ]
+  },
+  "footer": {
+    "text": "Veteran owned and operated. Fully insured.",
+    "links": [
+      {
+        "label": "Privacy Policy",
+        "href": "/privacy"
+      },
+      {
+        "label": "Leave a Review",
+        "href": "https://maps.google.com/"
+      }
+    ]
+  },
+  "theme": {
+    "background": "#0b0d10",
+    "surface": "#14171c",
+    "text": "#f2f4f7",
+    "accent": "#1a7fe0",
+    "accentDark": "#1465b4",
+    "onAccent": "#ffffff"
+  },
+  "pages": {
+    "full-flake": {
+      "eyebrow": "Our most popular system",
+      "title": "Epoxy Flake Floors",
+      "intro": "Vinyl color chips broadcast into a 100% solids epoxy base and locked under a UV-stable polyaspartic topcoat. It's the floor we install more than any other, because it looks good on day one and still looks good ten years later.",
+      "image": "/brand/flake-blends.jpg",
+      "cta": {
+        "label": "Get a Free Quote",
+        "href": "/#contact"
+      },
+      "sections": [
+        {
+          "id": "where",
+          "heading": "Where Epoxy Flake Floors Can Be Used",
+          "body": [
+            "Flake works anywhere concrete takes abuse and needs to stay clean. The texture hides dust and tire marks, and the topcoat shrugs off water, sun, and chemicals, so the same system covers a two-car garage, a covered patio, and a 10,000 sq ft shop."
+          ],
+          "bullets": [
+            "Residential garages and carports",
+            "Workshops, barns, and metal buildings",
+            "Patios, porches, walkways, and pool decks",
+            "Basements, laundry rooms, and mudrooms",
+            "Auto shops, detail bays, and showrooms",
+            "Retail floors, gyms, vet clinics, and locker rooms",
+            "Warehouses, storage rooms, and light manufacturing"
+          ]
+        },
+        {
+          "id": "why",
+          "heading": "Why Choose Epoxy Flakes",
+          "body": [
+            "A flake floor isn't paint. It's a bonded, seamless coating system that becomes part of the slab. Compared with bare concrete, tile, or a roll-on kit, it holds up better and costs less over its life."
+          ],
+          "bullets": [
+            "Hot-tire resistant: the polyaspartic topcoat won't lift or peel under a warm tire",
+            "Hides dirt, dust, and stains between cleanings",
+            "UV stable, so outdoor and sun-facing floors don't yellow or chalk",
+            "Seals porous concrete against oil, salt, and moisture stains",
+            "Installed in one day on most garages, back in use within 48 hours",
+            "30+ color blends to match trim, cabinets, or brand colors",
+            "Backed by our 15-year residential warranty against peeling"
+          ]
+        },
+        {
+          "id": "install",
+          "heading": "The Installation Process",
+          "body": [
+            "Every floor gets the same prep whether it's 400 square feet or 40,000. Most of the work, and most of the difference between a floor that lasts and one that peels, is in the first two steps."
+          ],
+          "steps": [
+            {
+              "title": "Estimate & moisture test",
+              "text": "We measure the space, check the slab for moisture and existing coatings, and pick a blend and finish with you."
+            },
+            {
+              "title": "Diamond grinding",
+              "text": "Industrial grinders with dust extraction open the pores of the concrete so the epoxy bonds mechanically. No acid etching."
+            },
+            {
+              "title": "Crack & spall repair",
+              "text": "Cracks, chips, and joints are filled with a fast-cure repair mortar and ground flush."
+            },
+            {
+              "title": "Base coat",
+              "text": "A pigmented 100% solids epoxy or polyaspartic base coat is rolled on and back-rolled for even build."
+            },
+            {
+              "title": "Flake broadcast",
+              "text": "Vinyl chips are broadcast into the wet base coat to full refusal, so no base color shows through."
+            },
+            {
+              "title": "Scrape & vacuum",
+              "text": "Once cured, loose chips are scraped off and vacuumed, leaving a uniform, lightly textured surface."
+            },
+            {
+              "title": "Clear topcoat",
+              "text": "A UV-stable polyaspartic clear coat locks the chips in and adds the gloss, chemical resistance, and optional anti-slip grit."
+            },
+            {
+              "title": "Cure & walk-through",
+              "text": "Walk on it the next morning, move light items back after 24 hours, and park after 48. We walk the floor with you before we leave."
+            }
+          ]
+        },
+        {
+          "id": "safety",
+          "heading": "Safety Features",
+          "body": [
+            "Flake floors are used in commercial kitchens, hospitals, and fire stations for a reason: they're easier to keep safe than the concrete they cover."
+          ],
+          "bullets": [
+            "Built-in texture from the chips gives more grip than smooth concrete or tile",
+            "Optional anti-slip aggregate in the topcoat for wet areas, pool decks, and entries",
+            "Seamless surface with no grout lines, cracks, or edges to trip on",
+            "Light-colored blends brighten garages and shops and improve visibility",
+            "Chemical resistant, so spilled oil, gas, brake fluid, and cleaners wipe up instead of soaking in",
+            "Low-odor polyaspartic topcoats let you back in the space the same day",
+            "Cove base and drain detailing available where floors need to be washed down"
+          ]
+        },
+        {
+          "id": "maintain",
+          "heading": "Maintaining Your Epoxy Floor",
+          "body": [
+            "There's no sealing, waxing, or refinishing schedule. A little routine care keeps a flake floor looking new for years."
+          ],
+          "bullets": [
+            "Sweep or dust-mop as needed; rinse with a hose or mop with warm water and a neutral cleaner",
+            "Wipe up oil, gas, and chemical spills when you see them",
+            "Skip harsh solvents, citrus strippers, and abrasive pads",
+            "Put a pad under jack stands, kickstands, and sharp steel edges",
+            "Lift heavy equipment instead of dragging it across the floor",
+            "If a section ever dulls after years of hard use, a fresh clear coat brings it back without redoing the floor"
+          ]
+        }
+      ],
+      "ctaHeading": "Ready to upgrade your floor?",
+      "ctaText": "Free on-site estimates across East Texas. Most garages are finished in a single day."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, mailHref } from '../lib/config';
+---
+
+<BaseLayout title="Privacy Policy">
+  <section class="section">
+    <div class="container prose">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p>
+        This is placeholder text. Replace it with your own policy before launch, and have it reviewed for the
+        regions you work in.
+      </p>
+      <h2>What we collect</h2>
+      <p>
+        When you request a quote through this site, {site.company.name} receives the details you enter in the
+        form: your name, phone number, email address, project ZIP code, and the description of your project. We
+        use them only to reply to you, schedule an estimate, and prepare your quote.
+      </p>
+      <h2>Project photos</h2>
+      <p>
+        We photograph finished floors for our records and warranty file. We only publish photos of your property
+        in our portfolio or on social media with your permission.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        To ask what we hold about you, or to have it removed, email
+        <a href={mailHref()}>{site.contact.email}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { max-width: 44rem; }
+  .prose h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1.5rem; }
+  .prose h2 { font-size: 1.9rem; margin-top: 2.5rem; }
+  .prose p { color: var(--color-muted); }
+</style>

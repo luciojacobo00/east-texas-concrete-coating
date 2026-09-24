@@ -1,0 +1,32 @@
+---
+// Renders an image value from site.json: optimized via astro:assets when the file lives in
+// src/assets/images/, or as a plain <img> for /public paths and remote URLs.
+import { Image } from 'astro:assets';
+import { resolveImage } from '../lib/config';
+
+interface Props {
+  src: string;
+  alt: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const { src, alt, widths = [480, 800, 1200, 1600], sizes = '100vw', loading = 'lazy', class: className } = Astro.props;
+const image = resolveImage(src);
+// SVGs are passed through untouched, so responsive widths don't apply to them.
+const responsive = typeof image !== 'string' && image.format !== 'svg';
+// Never upscale: drop requested widths larger than the source file, falling back to its own width.
+const fitting = typeof image === 'string' ? [] : widths.filter((w) => w <= image.width);
+const srcsetWidths = typeof image === 'string' || fitting.length > 0 ? fitting : [image.width];
+const maxWidth = Math.max(...srcsetWidths, 0);
+---
+
+{typeof image === 'string' ? (
+  <img src={image} alt={alt} loading={loading} decoding="async" class={className} />
+) : responsive ? (
+  <Image src={image} alt={alt} width={maxWidth} widths={srcsetWidths} sizes={sizes} loading={loading} class={className} />
+) : (
+  <Image src={image} alt={alt} loading={loading} class={className} />
+)}
