@@ -26,7 +26,7 @@ Edit `src/config/site.json`. Every component reads from it through the typed hel
 | `social`      | Social links in the contact section and footer. `platform` picks the icon: `instagram`, `facebook`, `youtube`, `tiktok`, `google`, `yelp`, `linkedin`, `x`. |
 | `nav`         | Header links and footer quick links. |
 | `header`      | The header button (`cta`, remove it to hide) and whether the phone number shows (`showPhone`). |
-| `hero`        | `layout` (`photo` or `banner`, see below), eyebrow, headline, subheading, image, buttons, the `highlights` check list, and the optional stats row. |
+| `hero`        | `layout` (`photo` or `banner`, see below), eyebrow, headline, subheading, image, buttons, and either the quote form (`showForm: true`, with `formHeading`) or the `highlights` check list and stats row in the right column. |
 | `services`    | Service cards. `icon` picks from: `garage`, `marble`, `forklift`, `sun`, `storefront`, `grinder`, `roller`, `shield`, `droplet`, `ruler`. `features`, `bestFor`, and `startingAt` are optional. |
 | `portfolio`   | Gallery items, the category filter buttons, and the optional `options` block ("Our Options": floor systems with CSS-drawn swatches from a `colors` list, plus a `finishes` chip row). |
 | `pages`       | Extra pages keyed by URL slug (`"full-flake"` becomes `/full-flake`), each with a title, intro, image, sections (paragraphs, bullets, or numbered steps), and a button. Link an option card to one with its `href`; `newTab: true` opens it in a new tab. |
@@ -48,7 +48,7 @@ Edit `src/config/site.json`. Every component reads from it through the typed hel
 - **Name only**: set `logo.src` to `""`. The name renders as a condensed uppercase wordmark.
 - **Logo image only**: set `showName` to `false`, for logos that already include the name.
 
-Brand artwork lives in `public/brand/`: `banner.png` (the hero banner and social share image), `logo.png` (the Texas-flag mark, cropped from the merch sheet), `merch.jpg`, and `banner-rounded.jpg`. `public/favicon.png` is the same mark at 128px. Replace `logo.png` with a transparent PNG of the official mark when one is available.
+`public/brand/metallic-colors.jpg` is cropped from GlobMarble's published metallic pigment color chart (the same swatch set as the client's low-resolution copy); replace it if the client uses a different pigment supplier. Brand artwork lives in `public/brand/`: `banner.png` (the hero banner and social share image), `logo.png` (the Texas-flag mark, cropped from the merch sheet), `merch.jpg`, and `banner-rounded.jpg`. `public/favicon.png` is the same mark at 128px. Replace `logo.png` with a transparent PNG of the official mark when one is available.
 
 ### Contact information
 
@@ -124,6 +124,7 @@ src/
     Portfolio.astro        Filterable gallery + lightbox
     Faq.astro              Accordion of common questions
     Contact.astro          Details + quote form
+    QuoteForm.astro        The form itself, shared by the hero and contact section
     Footer.astro
     Logo.astro / SiteImage.astro / ServiceIcon.astro / SocialIcon.astro
   pages/index.astro        Assembles the sections

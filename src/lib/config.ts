@@ -15,6 +15,8 @@ export interface FloorOption {
   colors: string[];
   /** Optional photo shown instead of the CSS swatch (public path, URL, or a file in src/assets/images/). */
   image?: string;
+  /** `cover` (default) fills the swatch and crops; `contain` shows the whole image centered, letterboxed on white. */
+  imageFit?: 'cover' | 'contain';
   bestFor?: string;
   /** Makes the card a link, e.g. "/full-flake" for a detail page defined under `pages`. */
   href?: string;
@@ -113,6 +115,9 @@ export interface SiteConfig {
     secondaryCta?: Link;
     /** Short trust points rendered as a check list under the buttons. */
     highlights?: string[];
+    /** Banner layout: put the quote form in the hero's right column instead of the highlights box. */
+    showForm?: boolean;
+    formHeading?: string;
     stats?: Stat[];
   };
   services: { eyebrow: string; heading: string; intro: string; items: Service[] };

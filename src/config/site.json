@@ -14,6 +14,7 @@
   },
   "contact": {
     "phone": "936-537-2555",
+    "altPhone": "936-447-0120",
     "email": "quotes@example.com",
     "address": {
       "city": "East Texas",
@@ -76,7 +77,6 @@
   },
   "hero": {
     "layout": "banner",
-    "eyebrow": "Veteran Owned & Operated · East Texas",
     "heading": "Tougher Floors for East Texas",
     "subheading": "Epoxy flake and polyaspartic concrete coatings for garages, patios, shops, and more. We grind the slab, repair the cracks, and lay down a floor that's durable, low maintenance, and gives your space a cleaner, tougher look.",
     "image": "/brand/banner.png",
@@ -89,15 +89,12 @@
       "label": "See Our Work",
       "href": "#portfolio"
     },
-    "highlights": [
-      "Durable, hot-tire and chemical resistant",
-      "Low maintenance, hose-off clean",
-      "Residential · Commercial · Industrial"
-    ],
     "stats": [],
     "imageBlur": 8,
     "imageFit": "contain",
-    "hideImage": true
+    "hideImage": true,
+    "showForm": true,
+    "formHeading": "Get a Free Quote"
   },
   "services": {
     "eyebrow": "What we install",
@@ -339,12 +336,16 @@
         },
         {
           "name": "Solid Color",
-          "description": "Clean, seamless single-color epoxy with an optional urethane topcoat. Easy to stripe for bays, aisles, and safety zones.",
+          "description": "Clean, seamless single-color epoxy in 15 standard colors, with an optional urethane topcoat. Easy to stripe for bays, aisles, and safety zones.",
           "style": "solid",
           "colors": [
             "#a7abb0"
           ],
-          "bestFor": "Warehouses, shops, commercial"
+          "bestFor": "Warehouses, shops, commercial",
+          "image": "/brand/solid-colors.png",
+          "imageFit": "contain",
+          "href": "/solid-color",
+          "newTab": true
         },
         {
           "name": "Metallic & Marble",
@@ -356,19 +357,11 @@
             "#6d7078",
             "#d9a05b"
           ],
-          "bestFor": "Showrooms, basements, lobbies"
-        },
-        {
-          "name": "Quartz Broadcast",
-          "description": "Colored quartz sand double-broadcast into the coating for a dense, slip-resistant, hose-off floor that handles water and grease.",
-          "style": "quartz",
-          "colors": [
-            "#9c7b5c",
-            "#d8c3a5",
-            "#6b4f3a",
-            "#b89a7a"
-          ],
-          "bestFor": "Kitchens, pool decks, wash bays"
+          "bestFor": "Showrooms, basements, lobbies",
+          "image": "/brand/metallic-colors.jpg",
+          "imageFit": "contain",
+          "href": "/metallic-marble",
+          "newTab": true
         }
       ],
       "finishes": [
@@ -597,6 +590,244 @@
       ],
       "ctaHeading": "Ready to upgrade your floor?",
       "ctaText": "Free on-site estimates across East Texas. Most garages are finished in a single day."
+    },
+    "solid-color": {
+      "eyebrow": "Clean, seamless, workhorse floors",
+      "title": "Solid Color Epoxy Floors",
+      "intro": "A single, uniform color of 100% solids epoxy rolled over a diamond-ground slab and sealed with a chemical-resistant urethane or polyaspartic topcoat. No chips, no pattern, just a smooth, bright, easy-to-clean surface that takes striping and logos well.",
+      "image": "/brand/solid-colors.png",
+      "cta": {
+        "label": "Get a Free Quote",
+        "href": "/#contact"
+      },
+      "ctaHeading": "Ready for a cleaner, tougher floor?",
+      "ctaText": "Free on-site estimates across East Texas. Shops and commercial floors are scheduled around your hours.",
+      "sections": [
+        {
+          "id": "where",
+          "heading": "Where Solid Color Floors Can Be Used",
+          "body": [
+            "Solid color is the go-to system where the floor is a work surface first: places that get striped, hosed down, driven on by forklifts, or need to look clean and bright under fluorescent light. It's also the base for logos, color-coded zones, and safety markings."
+          ],
+          "bullets": [
+            "Warehouses, distribution centers, and loading docks",
+            "Manufacturing floors and production lines",
+            "Auto repair bays, tire shops, and detail shops",
+            "Fire stations, fleet garages, and equipment barns",
+            "Commercial kitchens, breweries, and food prep areas",
+            "Retail back-of-house, stockrooms, and storage",
+            "Mechanical rooms, hallways, and stairwells",
+            "Home shops and garages that want a clean, simple look"
+          ]
+        },
+        {
+          "id": "why",
+          "heading": "Why Choose a Solid Color Floor",
+          "body": [
+            "It's the most economical coating system we install, and in a working building it's often the most practical. A uniform color shows spills and dropped parts immediately, reflects light back into the space, and gives you a blank canvas for striping and branding."
+          ],
+          "bullets": [
+            "Lowest cost per square foot of any coating system",
+            "Brightens the space: light gray and white floors bounce light and cut lighting costs",
+            "Easy to see leaks, spills, and dropped hardware",
+            "Seamless and non-porous, so oil, coolant, and chemicals wipe up instead of soaking in",
+            "Striping, safety zones, and logos bond directly into the system",
+            "Spot repairs and re-coats blend in without a visible patch",
+            "Available in 15 standard colors, or color-matched to a brand"
+          ]
+        },
+        {
+          "id": "install",
+          "heading": "The Installation Process",
+          "body": [
+            "The prep is identical to our flake and metallic floors. The difference is in the build: a pigmented base, an optional second coat for extra thickness, and a clear protective topcoat."
+          ],
+          "steps": [
+            {
+              "title": "Estimate & moisture test",
+              "text": "We measure the space, check the slab for moisture, oil saturation, and old coatings, and pick a color and finish with you."
+            },
+            {
+              "title": "Diamond grinding",
+              "text": "Industrial grinders with dust extraction profile the concrete so the epoxy bonds mechanically. No acid etching."
+            },
+            {
+              "title": "Crack & joint repair",
+              "text": "Cracks, spalls, and control joints are filled with a fast-cure repair mortar and ground flush."
+            },
+            {
+              "title": "Pigmented base coat",
+              "text": "A 100% solids epoxy in your color is rolled on and back-rolled for a uniform, even build."
+            },
+            {
+              "title": "Second coat (optional)",
+              "text": "Heavy-traffic floors get a second pigmented coat, or a high-build epoxy, for extra thickness and impact resistance."
+            },
+            {
+              "title": "Striping & markings",
+              "text": "Bay lines, aisles, safety zones, and logos are masked and applied before the topcoat so they're sealed in."
+            },
+            {
+              "title": "Clear topcoat",
+              "text": "A chemical-resistant urethane or UV-stable polyaspartic clear coat adds the gloss, wear layer, and optional anti-slip grit."
+            },
+            {
+              "title": "Cure & turnover",
+              "text": "Foot traffic the next morning, rolling loads after 48 hours, full chemical resistance within a week. We schedule nights and weekends to keep you running."
+            }
+          ]
+        },
+        {
+          "id": "safety",
+          "heading": "Safety Features",
+          "body": [
+            "A solid color floor is the standard in facilities where safety is audited, because everything about it can be seen, marked, and cleaned."
+          ],
+          "bullets": [
+            "Anti-slip aggregate available in the topcoat for wet areas, wash bays, and ramps",
+            "High-visibility striping for forklift aisles, pedestrian walkways, and keep-clear zones",
+            "Light colors improve visibility and make hazards and spills obvious",
+            "Seamless surface with no joints, cracks, or edges to trip on or trap bacteria",
+            "Chemical and fuel resistant, so spills stay on top where they can be cleaned",
+            "Cove base and drain detailing where floors need to be washed down",
+            "USDA/FDA-compliant systems for food and beverage spaces"
+          ]
+        },
+        {
+          "id": "maintain",
+          "heading": "Maintaining Your Solid Color Floor",
+          "body": [
+            "No waxing, sealing, or buffing. Routine cleaning and a little common sense keep a solid color floor looking new, and it's the easiest system to touch up when a shop earns its scars."
+          ],
+          "bullets": [
+            "Sweep or dust-mop daily in working spaces; auto-scrub or mop with a neutral cleaner as needed",
+            "Wipe up oil, coolant, brake fluid, and solvents when you see them",
+            "Avoid dragging steel edges or dropping heavy tools; use pads under jack stands and equipment feet",
+            "Skip harsh strippers and abrasive pads that dull the topcoat",
+            "Use non-marking tires on forklifts and carts where possible",
+            "A fresh clear coat every several years, or in the high-wear lanes only, brings the floor back without redoing it"
+          ]
+        }
+      ]
+    },
+    "metallic-marble": {
+      "eyebrow": "One-of-a-kind showpiece floors",
+      "title": "Metallic & Marble Epoxy Floors",
+      "intro": "Metallic pearl pigments are blended into clear 100% solids epoxy and hand-worked across the floor so the pigment drifts, pools, and veins as it cures. The result looks like polished marble, lava, or brushed metal, and no two floors are ever alike.",
+      "image": "/brand/metallic-colors.jpg",
+      "cta": {
+        "label": "Get a Free Quote",
+        "href": "/#contact"
+      },
+      "ctaHeading": "Want a floor nobody else has?",
+      "ctaText": "Free on-site estimates across East Texas. Bring a color idea or a photo you like and we'll match a pour to it.",
+      "sections": [
+        {
+          "id": "where",
+          "heading": "Where Metallic & Marble Floors Can Be Used",
+          "body": [
+            "Metallic floors go where the floor is meant to be seen. They're most often chosen for finished living space and for businesses that want the floor to be part of the brand. Indoors is the rule: the epoxy base isn't UV stable, so for a covered patio or sun room we build the same look with a UV-stable topcoat."
+          ],
+          "bullets": [
+            "Finished basements, game rooms, and home theaters",
+            "Living rooms, kitchens, and open-plan remodels on slab",
+            "Show garages and car collections",
+            "Barbershops, salons, tattoo studios, and boutiques",
+            "Restaurants, bars, breweries, and coffee shops",
+            "Showrooms, lobbies, and office reception areas",
+            "Gyms, studios, and clinics that want a premium look",
+            "Retail floors and event spaces"
+          ]
+        },
+        {
+          "id": "why",
+          "heading": "Why Choose a Metallic & Marble Floor",
+          "body": [
+            "It's the closest thing to polished stone you can put over an existing slab, at a fraction of the cost of real marble or terrazzo, with none of the grout lines and a fraction of the maintenance."
+          ],
+          "bullets": [
+            "Truly one of a kind: the pigment moves as it cures, so your floor's pattern exists nowhere else",
+            "Depth and shine that changes with the light and the angle you view it from",
+            "Two- and three-color pours, from subtle silver and charcoal to bold copper, blue, or red",
+            "Seamless surface with no grout lines to stain or crack",
+            "Far less expensive than natural stone, terrazzo, or large-format tile",
+            "Same tough epoxy and urethane build as our commercial floors underneath",
+            "Covers stained, ugly, or previously coated concrete completely"
+          ]
+        },
+        {
+          "id": "install",
+          "heading": "The Installation Process",
+          "body": [
+            "Prep is the same as every floor we install. The difference is the pour itself: metallic floors are built up in coats and worked by hand while wet, so timing and technique matter more than with any other system."
+          ],
+          "steps": [
+            {
+              "title": "Design & estimate",
+              "text": "We look at the space and the light, pick your base and accent pigments, and decide on the technique: veined, dropped, or full-swirl marble."
+            },
+            {
+              "title": "Diamond grinding",
+              "text": "Dust-free grinders open the concrete so the epoxy bonds. Old coatings, adhesives, and paint are removed completely."
+            },
+            {
+              "title": "Crack & surface repair",
+              "text": "Cracks, joints, and pits are filled and ground flush. Metallic floors are glossy, so surface prep is especially thorough."
+            },
+            {
+              "title": "Pigmented base coat",
+              "text": "A solid-color epoxy base, usually black or charcoal, is applied so the metallic layer has a dark background to play against."
+            },
+            {
+              "title": "Metallic pour",
+              "text": "Clear epoxy loaded with pearl pigment is poured and spread, then a second color is dropped in and worked with rollers, brushes, and a light mist of solvent to move the pigment into veins and cells."
+            },
+            {
+              "title": "Cure",
+              "text": "The floor is left untouched, in a closed room, while the pattern settles and hardens. Dust and foot traffic are kept out for a full day."
+            },
+            {
+              "title": "Clear topcoat",
+              "text": "A high-gloss or satin urethane clear coat locks in the pattern and provides the scratch, chemical, and UV protection."
+            },
+            {
+              "title": "Walk-through",
+              "text": "Walk on it after 24 hours and move furniture back after 72. We walk the floor with you and go over care before we leave."
+            }
+          ]
+        },
+        {
+          "id": "safety",
+          "heading": "Safety Features",
+          "body": [
+            "A metallic floor is a glossy floor, so we plan for grip up front and build the rest of the safety in the same way we do for commercial work."
+          ],
+          "bullets": [
+            "Anti-slip additive available in the topcoat for entries, kitchens, and salons where floors get wet",
+            "Satin finish option that keeps the depth while cutting glare and slickness",
+            "Seamless surface with no grout lines, edges, or transitions to trip on",
+            "Non-porous and easy to sanitize, which is why salons, studios, and clinics choose it",
+            "Chemical, stain, and abrasion resistant urethane topcoat",
+            "Low-odor materials and a sealed cure room; you're back in the space within a day or two",
+            "Cove base and threshold detailing available for wet rooms"
+          ]
+        },
+        {
+          "id": "maintain",
+          "heading": "Maintaining Your Metallic Floor",
+          "body": [
+            "There's no polishing, waxing, or resealing on a schedule. Keep grit off it, clean spills, and it stays glassy for years."
+          ],
+          "bullets": [
+            "Dust-mop or vacuum with a soft head regularly; grit is what dulls a glossy floor",
+            "Damp-mop with warm water and a pH-neutral cleaner; skip vinegar, bleach, and abrasive powders",
+            "Wipe up spills, especially hair dye, wine, and oil, when you see them",
+            "Use felt pads under furniture and mats at exterior doors",
+            "Avoid dragging appliances or steel edges across the surface",
+            "If the gloss ever dulls in a traffic lane after years of use, a fresh clear coat restores the shine without touching the pattern"
+          ]
+        }
+      ]
     }
   }
 }

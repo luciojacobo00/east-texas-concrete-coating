@@ -79,7 +79,7 @@ const items = await Promise.all(
               <li class="option">
                 <Card class="option__card" {...linkProps}>
                 {o.image ? (
-                  <span class="swatch swatch--image">
+                  <span class:list={['swatch', 'swatch--image', { 'swatch--contain': o.imageFit === 'contain' }]}>
                     <SiteImage src={o.image} alt={`${o.name} color blends`} widths={[400, 800]} sizes="(max-width: 560px) 100vw, 25vw" />
                   </span>
                 ) : (
@@ -263,10 +263,10 @@ const items = await Promise.all(
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* Fills the row with however many options exist, up to four across on wide screens. */
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 1rem;
   }
-  @media (max-width: 1024px) { .options__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) { .options__list { grid-template-columns: minmax(0, 1fr); } }
   .option { display: flex; }
   .option__card {
@@ -353,6 +353,7 @@ const items = await Promise.all(
   .swatch--image { overflow: hidden; }
   .swatch--image :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .swatch--image::after { background: none; }
+  .swatch--contain :global(img) { object-fit: contain; padding: 0.35rem; background: #fff; }
 
   .options__finishes {
     margin: 1.5rem 0 0;

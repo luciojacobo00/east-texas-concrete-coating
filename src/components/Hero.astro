@@ -1,6 +1,7 @@
 ---
 import { site } from '../lib/config';
 import SiteImage from './SiteImage.astro';
+import QuoteForm from './QuoteForm.astro';
 const { hero } = site;
 const banner = hero.layout === 'banner';
 const blur = Math.max(0, hero.imageBlur ?? 0);
@@ -35,7 +36,8 @@ const positionStyle = [
         </div>
       </div>
       <div class="hero__aside">
-        {hero.highlights && hero.highlights.length > 0 && (
+        {hero.showForm && <QuoteForm compact idPrefix="hero" heading={hero.formHeading} />}
+        {!hero.showForm && hero.highlights && hero.highlights.length > 0 && (
           <ul class="hero__highlights hero__highlights--stack">
             {hero.highlights.map((h) => (
               <li>
@@ -45,7 +47,7 @@ const positionStyle = [
             ))}
           </ul>
         )}
-        {hero.stats && hero.stats.length > 0 && (
+        {!hero.showForm && hero.stats && hero.stats.length > 0 && (
           <ul class="hero__stats hero__stats--aside">
             {hero.stats.map((s) => (
               <li>
@@ -252,6 +254,7 @@ const positionStyle = [
       linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--color-bg) 90%, transparent));
   }
   .hero--backdrop-only .hero__inner--banner { padding-top: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(4rem, 8vw, 7rem); align-items: center; }
+  .hero__inner--banner:has(.quote-form) { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
   .hero__inner--banner {
     padding-top: clamp(3rem, 6vw, 5rem);
     display: grid;
@@ -275,6 +278,7 @@ const positionStyle = [
   }
   .hero__stats--aside { margin: 0; padding: 0; border: 0; gap: 1.25rem 2.5rem; }
   @media (max-width: 900px) {
-    .hero__inner--banner { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .hero__inner--banner,
+    .hero__inner--banner:has(.quote-form) { grid-template-columns: minmax(0, 1fr); align-items: start; }
   }
 </style>
