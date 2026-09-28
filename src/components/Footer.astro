@@ -30,7 +30,7 @@ const path = Astro.url.pathname;
         {site.nav.map((l) => <li><a href={navHref(l.href, path)}>{l.label}</a></li>)}
         {site.footer.links.map((l) => (
           <li>
-            <a href={l.href} target={isExternal(l.href) ? '_blank' : undefined} rel={isExternal(l.href) ? 'noopener' : undefined}>{l.label}</a>
+            <a href={navHref(l.href, path)} target={isExternal(l.href) ? '_blank' : undefined} rel={isExternal(l.href) ? 'noopener' : undefined}>{l.label}</a>
           </li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 ---
-import { site } from '../lib/config';
+import { site, navHref } from '../lib/config';
+const path = Astro.url.pathname;
 import SiteImage from './SiteImage.astro';
 import QuoteForm from './QuoteForm.astro';
 const { hero } = site;
@@ -31,8 +32,8 @@ const positionStyle = [
         <h1>{hero.heading}</h1>
         <p class="hero__sub">{hero.subheading}</p>
         <div class="hero__actions">
-          <a href={hero.primaryCta.href} class="btn btn--primary">{hero.primaryCta.label}</a>
-          {hero.secondaryCta && <a href={hero.secondaryCta.href} class="btn btn--ghost">{hero.secondaryCta.label}</a>}
+          <a href={navHref(hero.primaryCta.href, path)} class="btn btn--primary">{hero.primaryCta.label}</a>
+          {hero.secondaryCta && <a href={navHref(hero.secondaryCta.href, path)} class="btn btn--ghost">{hero.secondaryCta.label}</a>}
         </div>
       </div>
       <div class="hero__aside">
@@ -72,8 +73,8 @@ const positionStyle = [
         <h1>{hero.heading}</h1>
         <p class="hero__sub">{hero.subheading}</p>
         <div class="hero__actions">
-          <a href={hero.primaryCta.href} class="btn btn--primary">{hero.primaryCta.label}</a>
-          {hero.secondaryCta && <a href={hero.secondaryCta.href} class="btn btn--ghost">{hero.secondaryCta.label}</a>}
+          <a href={navHref(hero.primaryCta.href, path)} class="btn btn--primary">{hero.primaryCta.label}</a>
+          {hero.secondaryCta && <a href={navHref(hero.secondaryCta.href, path)} class="btn btn--ghost">{hero.secondaryCta.label}</a>}
         </div>
         {hero.highlights && hero.highlights.length > 0 && (
           <ul class="hero__highlights">

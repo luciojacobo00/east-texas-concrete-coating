@@ -1,5 +1,6 @@
 ---
-import { site } from '../lib/config';
+import { site, navHref } from '../lib/config';
+const path = Astro.url.pathname;
 const { faq } = site;
 const items = faq?.items ?? [];
 
@@ -22,7 +23,7 @@ const jsonLd = {
         <span class="eyebrow">{faq.eyebrow}</span>
         <h2>{faq.heading}</h2>
         <p>{faq.intro}</p>
-        {faq.cta && <a href={faq.cta.href} class="btn btn--ghost">{faq.cta.label}</a>}
+        {faq.cta && <a href={navHref(faq.cta.href, path)} class="btn btn--ghost">{faq.cta.label}</a>}
       </div>
 
       <div class="faq__list">

@@ -184,9 +184,22 @@ export const mapsHref = (): string =>
 
 export const isExternal = (href: string): boolean => /^https?:\/\//.test(href);
 
-/** Makes in-page anchors ("#contact") work from sub-pages by pointing them back at the home page. */
+/**
+ * The path the site is served under, without a trailing slash: "" at a domain root, or
+ * "/east-texas-concrete-coating" on GitHub Pages. Comes from `base` in astro.config.mjs.
+ */
+export const basePath: string = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+/** Prefixes a root-relative path ("/privacy", "/brand/logo.png") with the base path. Other hrefs pass through. */
+export const withBase = (href: string): string =>
+  href.startsWith('/') && !href.startsWith('//') ? `${basePath}${href}` : href;
+
+/** True on the home page, wherever the site is mounted. */
+export const isHome = (pathname: string): boolean => pathname.replace(/\/$/, '') === basePath;
+
+/** Makes in-page anchors ("#contact") work from sub-pages by pointing them back at the home page, and applies the base path. */
 export const navHref = (href: string, pathname: string): string =>
-  href.startsWith('#') && pathname !== '/' ? `/${href}` : href;
+  href.startsWith('#') ? (isHome(pathname) ? href : withBase(`/${href}`)) : withBase(href);
 
 const assetImages = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/images/*.{jpg,jpeg,png,webp,avif,gif,svg,JPG,JPEG,PNG}',
@@ -199,7 +212,8 @@ const assetImages = import.meta.glob<{ default: ImageMetadata }>(
  * - A path starting with "/" (public folder) or a full URL is used as-is.
  */
 export const resolveImage = (src: string): ImageMetadata | string => {
-  if (src.startsWith('/') || isExternal(src)) return src;
+  if (src.startsWith('/')) return withBase(src);
+  if (isExternal(src)) return src;
   const match = assetImages[`../assets/images/${src}`];
   if (!match) {
     throw new Error(`site.json references "${src}", but no such file exists in src/assets/images/.`);

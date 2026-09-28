@@ -1,13 +1,13 @@
 ---
-import { site } from '../lib/config';
+import { site, withBase } from '../lib/config';
 const { logo, name } = site.company;
 const hasMark = logo.src.trim().length > 0;
 // With no logo image configured, the company name always shows so the header is never empty.
 const showName = logo.showName || !hasMark;
 ---
 
-<a href="/" class="logo" aria-label={`${name} home`}>
-  {hasMark && <img src={logo.src} alt={showName ? '' : logo.alt} width="44" height="44" />}
+<a href={withBase('/')} class="logo" aria-label={`${name} home`}>
+  {hasMark && <img src={withBase(logo.src)} alt={showName ? '' : logo.alt} width="44" height="44" />}
   {showName && <span class="logo__name">{name}</span>}
 </a>
 

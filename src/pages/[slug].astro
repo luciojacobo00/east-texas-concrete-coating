@@ -2,7 +2,7 @@
 // One route for every entry under `pages` in site.json: "full-flake" -> /full-flake
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteImage from '../components/SiteImage.astro';
-import { site } from '../lib/config';
+import { site, withBase } from '../lib/config';
 import type { ContentPage } from '../lib/config';
 
 export function getStaticPaths() {
@@ -20,7 +20,7 @@ const { page } = Astro.props as { page: ContentPage };
           {page.eyebrow && <span class="eyebrow">{page.eyebrow}</span>}
           <h1>{page.title}</h1>
           <p class="page__intro">{page.intro}</p>
-          {page.cta && <a href={page.cta.href} class="btn btn--primary">{page.cta.label}</a>}
+          {page.cta && <a href={withBase(page.cta.href)} class="btn btn--primary">{page.cta.label}</a>}
         </div>
         {page.image && (
           <div class="page__image">
@@ -36,7 +36,7 @@ const { page } = Astro.props as { page: ContentPage };
         <ol>
           {page.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
         </ol>
-        {page.cta && <a href={page.cta.href} class="btn btn--primary toc__cta">{page.cta.label}</a>}
+        {page.cta && <a href={withBase(page.cta.href)} class="btn btn--primary toc__cta">{page.cta.label}</a>}
       </nav>
 
       <div class="sections">
@@ -66,7 +66,7 @@ const { page } = Astro.props as { page: ContentPage };
           <div class="page__cta">
             <h2>{page.ctaHeading ?? 'Ready to get started?'}</h2>
             {page.ctaText && <p>{page.ctaText}</p>}
-            <a href={page.cta.href} class="btn btn--primary">{page.cta.label}</a>
+            <a href={withBase(page.cta.href)} class="btn btn--primary">{page.cta.label}</a>
           </div>
         )}
       </div>

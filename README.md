@@ -137,4 +137,16 @@ public/favicon.png
 
 ## Deploying
 
-`npm run build` produces a fully static `dist/` folder. Deploy it to Netlify, Vercel, Cloudflare Pages, GitHub Pages, or any static host. Set `site` in `astro.config.mjs` to the production URL so canonical links and social previews resolve correctly.
+The site is hosted free on GitHub Pages at https://luciojacobo00.github.io/east-texas-concrete-coating/, served from the `gh-pages` branch. To publish the current code:
+
+```bash
+npm run deploy
+```
+
+That builds the site and force-pushes `dist/` to `gh-pages`; GitHub serves it within a minute or two. The `main` branch holds the source, `gh-pages` holds only built output, so never edit `gh-pages` by hand.
+
+**Automatic deploys on push (optional):** `deploy/github-actions-deploy.yml.example` is a ready-made GitHub Actions workflow. Pushing workflow files needs the GitHub CLI token to have the `workflow` scope, so run `gh auth refresh -h github.com -s workflow` once, then move the file to `.github/workflows/deploy.yml`, switch the Pages source to "GitHub Actions" in the repo settings, and push.
+
+Because the site lives under a sub-path, `astro.config.mjs` sets `base` to `/east-texas-concrete-coating` and every internal link and public image goes through the `withBase()` / `navHref()` helpers in `src/lib/config.ts`. Root-relative paths in `site.json` (`/brand/logo.png`, `/privacy`) stay as written; the helpers add the prefix at build time. In local dev the site is at http://localhost:4321/east-texas-concrete-coating/.
+
+**Moving to a custom domain** (for example `easttexasconcretecoatings.com`): set the domain as the Pages custom domain in the repo settings, change `site` in `astro.config.mjs` to that domain, delete the `base` line, and push. `npm run build` also produces a plain static `dist/` folder that can go to Netlify, Vercel, or any other host.

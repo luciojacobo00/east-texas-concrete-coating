@@ -3,7 +3,7 @@ import '@fontsource-variable/inter';
 import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/barlow-condensed/700.css';
 import '../styles/global.css';
-import { site } from '../lib/config';
+import { site, withBase } from '../lib/config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -20,7 +20,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
 const t = site.theme;
 const onAccent = t.onAccent ?? '#111111';
 const share = site.company.shareImage?.trim();
-const ogImage = share ? (Astro.site && !/^https?:/.test(share) ? new URL(share, Astro.site).href : share) : undefined;
+const ogImage = share ? (Astro.site && !/^https?:/.test(share) ? new URL(withBase(share), Astro.site).href : share) : undefined;
 
 const a = site.contact.address;
 const jsonLd = {
@@ -53,8 +53,8 @@ const jsonLd = {
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" href={withBase('/favicon.png')} type="image/png" />
+    <link rel="apple-touch-icon" href={withBase('/favicon.png')} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

@@ -1,6 +1,6 @@
 ---
 import { getImage } from 'astro:assets';
-import { site, resolveImage } from '../lib/config';
+import { site, resolveImage, withBase } from '../lib/config';
 import SiteImage from './SiteImage.astro';
 const { portfolio } = site;
 const uniform = (portfolio.grid ?? 'uniform') === 'uniform';
@@ -73,7 +73,7 @@ const items = await Promise.all(
             const c = (i: number) => chips[i % Math.max(chips.length, 1)] ?? base;
             const Card = o.href ? 'a' : 'div';
             const linkProps = o.href
-              ? { href: o.href, target: o.newTab ? '_blank' : undefined, rel: o.newTab ? 'noopener' : undefined }
+              ? { href: withBase(o.href), target: o.newTab ? '_blank' : undefined, rel: o.newTab ? 'noopener' : undefined }
               : {};
             return (
               <li class="option">
