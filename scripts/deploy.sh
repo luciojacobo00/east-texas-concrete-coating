@@ -17,6 +17,7 @@ cd .deploy
 git init -q -b gh-pages
 git add -A
 git -c user.name="$NAME" -c user.email="$EMAIL" commit -q -m "Deploy site from $STAMP"
-git push -q --force "$REMOTE" gh-pages
+# Large pushes over HTTPS to GitHub can fail with a 400 on the default settings; these two avoid that.
+git -c http.postBuffer=524288000 -c http.version=HTTP/1.1 push -q --force "$REMOTE" gh-pages
 cd .. && rm -rf .deploy
 echo "Published. GitHub Pages picks it up within a minute or two."
